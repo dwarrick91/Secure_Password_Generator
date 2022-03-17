@@ -4,8 +4,9 @@ var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"
 
 var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
+var special = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@","^", "_", "|", "~"]
 
-
+var numeric = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 
@@ -25,30 +26,71 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+
 function generatePassword() {
   var finalPassword = "hello";
+  var characterOptions =[]
+  var passwordLength = prompt("How many characters do you want your password.  Please choose between 8-128 characters.")
+  
+  if  (isNaN(passwordLength)) {
+    alert("Please pick a valid number")
+    return ""
+  }  
+  
+  if ((passwordLength < 8) || (passwordLength > 128)) {
+    alert("please pick a number between 8-128")
+    return ""
+  }
 
-  var passwordLength = prompt ( "How many characters do you want your password.  Please choose between 8-128 characters.")
-if ((passwordLength >= 8) && (passwordLength <= 128)) {
-  confirm("do you want to include lowercase numbers?")
-  confirm("do you want to dance?")
-} else {
-  alert("please pick a number between 8-128") 
-}
+  var userLowercase = confirm("do you want to include lowercase letters?")
 
-
-    return finalPassword
+if (userLowercase) {
+  characterOptions = characterOptions.concat(lowercase)
   
 }
 
-  // document.getElementById(generate) + prompt("How long do you want your password to be?")
+  var userUppercase = confirm("do you want to include UPPERCASE letters?")
+
+if (userUppercase) {
+  characterOptions = characterOptions.concat(uppercase)
+  
+}
 
 
-  // function generatePassword() {
-  //   prompt ("How many characters do you want to use?")
-  // }
+  var userSpecial = confirm("do you want to include special characters?")
+
+  if (userSpecial) {
+    characterOptions = characterOptions.concat(special)
+
+    
+  }
+  var userNumeric = confirm("do you want to include numbers")
+
+  if (userNumeric) {
+    characterOptions = characterOptions.concat(numeric)
+    
+  }
+
+
+  for (let index = 0; index < passwordLength; index++) {
+    const element = array[index];
+    
+  }
+  console.log(characterOptions);
+  
+
+
+
+  return finalPassword
+
+
+}
+// document.getElementById(generate) + prompt("How long do you want your password to be?")
+
+
+// function generatePassword() {
+//   prompt ("How many characters do you want to use?")
+// }
 
 
 // GIVEN I need a new, secure password
@@ -68,3 +110,5 @@ if ((passwordLength >= 8) && (passwordLength <= 128)) {
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
 // ```
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
